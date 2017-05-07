@@ -1,0 +1,10 @@
+[package]
+name = "tumblr"
+version = "0.1.0"
+authors = ["mraof <mraof@mraof.com>"]
+
+[dependencies]
+serde = "*"
+serde_json = "*"
+serde_derive = "*"
+oauth-client = "*"
