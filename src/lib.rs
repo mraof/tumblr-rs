@@ -5,49 +5,49 @@ extern crate serde_json;
 
 extern crate oauth_client;
 
+pub use oauth_client::ParamList;
 use oauth_client::Token;
-use oauth_client::ParamList;
 
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct BlogInfo {
-    admin: Option<bool>,
-    ask: bool,
-    ask_anon: bool,
-    ask_page_title: String,
-    can_send_fan_mail: bool,
-    can_submit: Option<bool>,
-    can_subscribe: bool,
-    description: String,
-    drafts: Option<u64>,
-    facebook: Option<String>,
-    facebook_opengraph_enabled: Option<String>,
-    followed: bool,
-    followers: Option<u64>,
-    is_adult: bool,
-    is_blocked_from_primary: bool,
-    is_nsfw: bool,
-    likes: Option<u64>,
-    messages: Option<u64>,
-    name: String,
-    posts: u64,
-    primary: Option<bool>,
-    queue: Option<u64>,
-    reply_conditions: String,
-    share_likes: bool,
-    submission_page_title: Option<String>,
-    submission_terms: Option<SubmissionTerms>,
-    subscribed: bool,
-    title: String,
-    total_posts: u64,
-    tweet: Option<String>,
-    twitter_enabled: Option<bool>,
-    twitter_send: Option<bool>,
+    pub admin: Option<bool>,
+    pub ask: bool,
+    pub ask_anon: bool,
+    pub ask_page_title: String,
+    pub can_send_fan_mail: bool,
+    pub can_submit: Option<bool>,
+    pub can_subscribe: bool,
+    pub description: String,
+    pub drafts: Option<u64>,
+    pub facebook: Option<String>,
+    pub facebook_opengraph_enabled: Option<String>,
+    pub followed: bool,
+    pub followers: Option<u64>,
+    pub is_adult: bool,
+    pub is_blocked_from_primary: bool,
+    pub is_nsfw: bool,
+    pub likes: Option<u64>,
+    pub messages: Option<u64>,
+    pub name: String,
+    pub posts: u64,
+    pub primary: Option<bool>,
+    pub queue: Option<u64>,
+    pub reply_conditions: String,
+    pub share_likes: bool,
+    pub submission_page_title: Option<String>,
+    pub submission_terms: Option<SubmissionTerms>,
+    pub subscribed: bool,
+    pub title: String,
+    pub total_posts: u64,
+    pub tweet: Option<String>,
+    pub twitter_enabled: Option<bool>,
+    pub twitter_send: Option<bool>,
     #[serde(rename = "type")]
-    blog_type: Option<String>,
-    updated: u64,
-    url: String,
+    pub blog_type: Option<String>,
+    pub updated: u64,
+    pub url: String,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -264,6 +264,7 @@ pub struct SAnswer {
     asking_name: String,
     asking_url: Option<String>,
     question: String,
+    is_blocks_post_format: bool,
     //everything has these
     blog_name: String,
     can_like: bool,
@@ -582,58 +583,58 @@ pub struct SChat {
 
 #[derive(Debug)]
 pub struct Post {
-    post_type: PostType,
-    blog_name: String,
-    can_like: bool,
-    can_reblog: bool,
-    can_reply: bool,
-    can_send_in_message: bool,
-    date: String,
-    display_avatar: bool,
-    featured_in_tag: Option<Vec<String>>,
-    featured_timestamp: Option<u64>,
-    followed: bool,
-    format: String,
-    id: u64,
-    is_anonymous: Option<bool>,
-    is_submission: Option<bool>,
-    liked: bool,
-    liked_timestamp: Option<u64>,
-    note_count: u64,
-    post_author: Option<String>,
-    post_url: String,
-    queued_state: Option<String>,
-    reblog: Option<Reblog>,
-    reblog_key: String,
-    recommended_color: Option<String>,
-    recommended_source: Option<String>,
-    scheduled_publish_time: Option<String>,
-    short_url: String,
-    slug: String,
-    source_title: Option<String>,
-    source_url: Option<String>,
-    state: PostState,
-    summary: String,
-    tags: Vec<String>,
-    timestamp: u64,
-    trail: Option<Vec<Trail>>,
+    pub post_type: PostType,
+    pub blog_name: String,
+    pub can_like: bool,
+    pub can_reblog: bool,
+    pub can_reply: bool,
+    pub can_send_in_message: bool,
+    pub date: String,
+    pub display_avatar: bool,
+    pub featured_in_tag: Option<Vec<String>>,
+    pub featured_timestamp: Option<u64>,
+    pub followed: bool,
+    pub format: String,
+    pub id: u64,
+    pub is_anonymous: Option<bool>,
+    pub is_submission: Option<bool>,
+    pub liked: bool,
+    pub liked_timestamp: Option<u64>,
+    pub note_count: u64,
+    pub post_author: Option<String>,
+    pub post_url: String,
+    pub queued_state: Option<String>,
+    pub reblog: Option<Reblog>,
+    pub reblog_key: String,
+    pub recommended_color: Option<String>,
+    pub recommended_source: Option<String>,
+    pub scheduled_publish_time: Option<String>,
+    pub short_url: String,
+    pub slug: String,
+    pub source_title: Option<String>,
+    pub source_url: Option<String>,
+    pub state: PostState,
+    pub summary: String,
+    pub tags: Vec<String>,
+    pub timestamp: u64,
+    pub trail: Option<Vec<Trail>>,
     //Only when param reblog_info is true
-    reblogged_from_can_message: Option<bool>,
-    reblogged_from_following: Option<bool>,
-    reblogged_from_id: Option<u64>,
-    reblogged_from_name: Option<String>,
-    reblogged_from_title: Option<String>,
-    reblogged_from_url: Option<String>,
-    reblogged_from_uuid: Option<String>,
-    reblogged_root_can_message: Option<bool>,
-    reblogged_root_following: Option<bool>,
-    reblogged_root_id: Option<String>,
-    reblogged_root_name: Option<String>,
-    reblogged_root_title: Option<String>,
-    reblogged_root_url: Option<String>,
-    reblogged_root_uuid: Option<String>,
+    pub reblogged_from_can_message: Option<bool>,
+    pub reblogged_from_following: Option<bool>,
+    pub reblogged_from_id: Option<u64>,
+    pub reblogged_from_name: Option<String>,
+    pub reblogged_from_title: Option<String>,
+    pub reblogged_from_url: Option<String>,
+    pub reblogged_from_uuid: Option<String>,
+    pub reblogged_root_can_message: Option<bool>,
+    pub reblogged_root_following: Option<bool>,
+    pub reblogged_root_id: Option<String>,
+    pub reblogged_root_name: Option<String>,
+    pub reblogged_root_title: Option<String>,
+    pub reblogged_root_url: Option<String>,
+    pub reblogged_root_uuid: Option<String>,
     //Only when param notes_info is true
-    notes: Option<Vec<Note>>,
+    pub notes: Option<Vec<Note>>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -663,6 +664,7 @@ pub enum PostType {
         asking_name: String,
         asking_url: Option<String>,
         question: String,
+        is_blocks_post_format: bool,
     },
     Video {
         caption: String,
@@ -892,6 +894,7 @@ impl SerializablePost {
                     asking_name: spost.asking_name,
                     asking_url: spost.asking_url,
                     question: spost.question,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                 };
                 Post {
                     post_type: post_type,
@@ -1241,31 +1244,31 @@ impl From<serde_json::Error> for Error {
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Meta {
-    status: u32,
-    msg: String,
+    pub status: u32,
+    pub msg: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Response {
-    blog: Option<BlogInfo>,
-    posts: Option<Vec<SerializablePost>>,
-    liked_count: Option<u64>,
-    liked_posts: Option<Vec<SerializablePost>>,
+    pub blog: Option<BlogInfo>,
+    pub posts: Option<Vec<SerializablePost>>,
+    pub liked_count: Option<u64>,
+    pub liked_posts: Option<Vec<SerializablePost>>,
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct Reblog {
-    comment: String,
-    tree_html: String,
+    pub comment: String,
+    pub tree_html: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 pub struct Trail {
-    content: Option<String>,
-    content_raw: String,
-    is_current_item: Option<bool>,
-    is_root_item: Option<bool>,
+    pub content: Option<String>,
+    pub content_raw: String,
+    pub is_current_item: Option<bool>,
+    pub is_root_item: Option<bool>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -1303,8 +1306,8 @@ pub enum Note {
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ImageDimensions {
-    height: u32,
-    width: u32,
+    pub height: u32,
+    pub width: u32,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -1320,44 +1323,44 @@ pub enum Video {
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct PhotoInfo {
-    alt_sizes: Vec<Photo>,
-    original_size: Photo,
-    exif: Option<Exif>,
-    caption: String,
+    pub alt_sizes: Vec<Photo>,
+    pub original_size: Photo,
+    pub exif: Option<Exif>,
+    pub caption: String,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Photo {
-    url: String,
-    height: u32,
-    width: u32,
+    pub url: String,
+    pub height: u32,
+    pub width: u32,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "PascalCase", deny_unknown_fields)]
 pub struct Exif {
-    aperture: Option<String>,
-    camera: Option<String>,
-    exposure: Option<String>,
-    focal_length: Option<String>,
+    pub aperture: Option<String>,
+    pub camera: Option<String>,
+    pub exposure: Option<String>,
+    pub focal_length: Option<String>,
     #[serde(rename = "ISO")]
-    iso: Option<u64>,
+    pub iso: Option<u64>,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct VideoEmbed {
-    embed_code: String,
-    width: u32,
+    pub embed_code: String,
+    pub width: u32,
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Dialogue {
-    label: String,
-    name: String,
-    phrase: String,
+    pub label: String,
+    pub name: String,
+    pub phrase: String,
 }
 
 #[derive(Debug)]
