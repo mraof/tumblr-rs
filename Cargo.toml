@@ -1,5 +1,9 @@
 [package]
 name = "tumblr"
+documentation = "https://docs.rs/tumblr"
+license = "MIT"
+repository = "https://github.com/mraof/tumblr-rs"
+description = "Library for working with the tumblr API"
 version = "0.1.0"
 authors = ["mraof <mraof@mraof.com>"]
 
