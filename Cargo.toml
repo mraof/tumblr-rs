@@ -11,4 +11,4 @@ authors = ["mraof <mraof@mraof.com>"]
 serde = "1"
 serde_json = "1"
 serde_derive = "1"
-oauth-client = "*"
+oauth-client = "0.3"
