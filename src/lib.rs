@@ -113,6 +113,7 @@ pub struct SText {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -172,6 +173,7 @@ pub struct SQuote {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -238,6 +240,7 @@ pub struct SLink {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -264,7 +267,6 @@ pub struct SAnswer {
     asking_name: String,
     asking_url: Option<String>,
     question: String,
-    is_blocks_post_format: bool,
     //everything has these
     blog_name: String,
     can_like: bool,
@@ -300,6 +302,7 @@ pub struct SAnswer {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -368,6 +371,7 @@ pub struct SVideo {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -393,9 +397,9 @@ pub struct SAudio {
     album: Option<String>,
     album_art: Option<String>,
     artist: Option<String>,
-    audio_source_url: String,
+    audio_source_url: Option<String>,
     audio_type: String,
-    audio_url: String,
+    audio_url: Option<String>,
     caption: String,
     embed: String,
     is_external: Option<bool>,
@@ -440,6 +444,7 @@ pub struct SAudio {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -502,6 +507,7 @@ pub struct SPhoto {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -562,6 +568,7 @@ pub struct SChat {
     tags: Vec<String>,
     timestamp: u64,
     trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     reblogged_from_can_message: Option<bool>,
     reblogged_from_following: Option<bool>,
@@ -618,6 +625,7 @@ pub struct Post {
     pub tags: Vec<String>,
     pub timestamp: u64,
     pub trail: Option<Vec<Trail>>,
+    is_blocks_post_format: bool,
     //Only when param reblog_info is true
     pub reblogged_from_can_message: Option<bool>,
     pub reblogged_from_following: Option<bool>,
@@ -683,9 +691,9 @@ pub enum PostType {
         album: Option<String>,
         album_art: Option<String>,
         artist: Option<String>,
-        audio_source_url: String,
+        audio_source_url: Option<String>,
         audio_type: String,
-        audio_url: String,
+        audio_url: Option<String>,
         caption: String,
         embed: String,
         is_external: Option<bool>,
@@ -716,7 +724,7 @@ impl SerializablePost {
             SerializablePost::Text(spost) => {
                 let post_type = PostType::Text { body: spost.body, title: spost.title };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -751,6 +759,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -771,7 +780,7 @@ impl SerializablePost {
             SerializablePost::Quote(spost) => {
                 let post_type = PostType::Quote { source: spost.source, text: spost.text };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -806,6 +815,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -836,7 +846,7 @@ impl SerializablePost {
                     url: spost.url,
                 };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -871,6 +881,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -897,7 +908,7 @@ impl SerializablePost {
                     is_blocks_post_format: spost.is_blocks_post_format,
                 };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -932,6 +943,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -964,7 +976,7 @@ impl SerializablePost {
                     video_url: spost.video_url,
                 };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -999,6 +1011,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -1035,7 +1048,7 @@ impl SerializablePost {
                     year: spost.year,
                 };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -1070,6 +1083,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -1096,7 +1110,7 @@ impl SerializablePost {
                     photoset_layout: spost.photoset_layout,
                 };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -1131,6 +1145,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -1155,7 +1170,7 @@ impl SerializablePost {
                     title: spost.title,
                 };
                 Post {
-                    post_type: post_type,
+                    post_type,
                     blog_name: spost.blog_name,
                     can_like: spost.can_like,
                     can_reblog: spost.can_reblog,
@@ -1190,6 +1205,7 @@ impl SerializablePost {
                     tags: spost.tags,
                     timestamp: spost.timestamp,
                     trail: spost.trail,
+                    is_blocks_post_format: spost.is_blocks_post_format,
                     reblogged_from_can_message: spost.reblogged_from_can_message,
                     reblogged_from_following: spost.reblogged_from_following,
                     reblogged_from_id: spost.reblogged_from_id,
@@ -1300,7 +1316,7 @@ pub enum Note {
         blog_uuid: String,
         followed: bool,
         timestamp: u64,
-    }
+    },
 }
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
@@ -1416,6 +1432,7 @@ impl<'a> Tumblr<'a> {
 mod tests {
     use super::{Tumblr, Response};
     use oauth_client::ParamList;
+
     #[test]
     fn requests() {
         let consumer_key = include_str!("../keys/consumer_key");
@@ -1430,23 +1447,23 @@ mod tests {
         println!("{:#?}", posts);
     }
 
-#[test]
-fn posting() {
-    let consumer_key = include_str!("../keys/consumer_key");
-    let consumer_secret = include_str!("../keys/consumer_secret");
-    let token = include_str!("../keys/token");
-    let token_secret = include_str!("../keys/token_secret");
-    let mut tumblr = Tumblr::new(consumer_key, consumer_secret);
-    tumblr.set_token(token, token_secret);
-    let posts: Response = tumblr.get("/blog/mroaf/posts/submission", None).unwrap();
-    for post in posts.posts.unwrap() {
-        let post = post.into_post();
-        println!("{:#?}", post);
-        let mut params = ParamList::new();
-        params.insert("id".into(), post.id.to_string().into());
-        params.insert("state".into(), "queue".into());
-        params.insert("answer".into(), "Grobbler".into());
-        tumblr.post("/blog/mroaf/post/edit", Some(&params)).unwrap();
+    #[test]
+    fn posting() {
+        let consumer_key = include_str!("../keys/consumer_key");
+        let consumer_secret = include_str!("../keys/consumer_secret");
+        let token = include_str!("../keys/token");
+        let token_secret = include_str!("../keys/token_secret");
+        let mut tumblr = Tumblr::new(consumer_key, consumer_secret);
+        tumblr.set_token(token, token_secret);
+        let posts: Response = tumblr.get("/blog/mroaf/posts/submission", None).unwrap();
+        for post in posts.posts.unwrap() {
+            let post = post.into_post();
+            println!("{:#?}", post);
+            let mut params = ParamList::new();
+            params.insert("id".into(), post.id.to_string().into());
+            params.insert("state".into(), "queue".into());
+            params.insert("answer".into(), "Grobbler".into());
+            tumblr.post("/blog/mroaf/post/edit", Some(&params)).unwrap();
+        }
     }
-}
 }
